@@ -11,11 +11,11 @@
         <div class="sticky-topbar">
             <div class="home-dashboard-header">
                 <div class="location-info">
-                    <div class="profile-pic" onclick="goToProfile()"></div>
+                    <div class="profile-pic" id="profilePic"></div>
                     <div class="location-text">
                         <div class="location-label">My Location</div>
                         <div class="location-name">
-                            <select name="location" id="select-location" onchange="updateLocation()">
+                            <select name="location" id="select-location">
                                 <option value="Woji, Port Harcourt">Woji, Port Harcourt</option>
                                 <option value="Obio-Akpor, Port Harcourt">Obio-Akpor, Port Harcourt</option>
                                 <option value="Mile 3, Port Harcourt">Mile 3, Port Harcourt</option>
@@ -26,23 +26,21 @@
                         </div>
                     </div>
                 </div>
-                <div class="notification-wrapper" onclick="showNotifications()">
-                    <svg class="notification-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5-5V7a5 5 0 00-10 0v5l-5 5h5m5 0v1a3 3 0 11-6 0v-1m6 0H9"/>
-                    </svg>
+                <div class="notification-wrapper" id="notificationBtn">
+                    <img src="./Resources/Resource Icons/icons8-alarm-50.png" alt="notification-bell" id="notification-bell">
                     <span class="notification-badge">3</span>
                 </div>
             </div>
 
             <div class="search-container">
                 <div style="position: relative; flex: 1;">
-                    <input type="text" id="searchInput" class="search-input" placeholder="Search gyms, workouts..." onkeyup="handleSearch(event)">
+                    <input type="text" id="searchInput" class="search-input" placeholder="Search gyms, workouts...">
                     <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <circle cx="11" cy="11" r="8"></circle>
                         <path d="m21 21-4.35-4.35"></path>
                     </svg>
                 </div>
-                <img src="./Resources/Resource Icons/icons8-filters-50.png" class="search-filter-icon" alt="search-filter-icon" onclick="showFilters()">
+                <img src="./Resources/Resource Icons/icons8-filters-50.png" class="search-filter-icon" alt="search-filter-icon" id="filterBtn">
             </div>
         </div>
 
@@ -50,7 +48,7 @@
             <div class="hero-card">
                 <div class="hero-content">
                     <h1 class="hero-title">The Best<br>That You<br>Can Get</h1>
-                    <button class="find-gym-button" onclick="findGym()">Find Gym</button>
+                    <button class="find-gym-button" id="findGymBtn">Find Gym</button>
                 </div>
             </div>
         </div>
@@ -58,15 +56,15 @@
         <div class="features-section">
             <div class="section-header">
                 <h2 class="section-title">Features</h2>
-                <a href="#" class="see-all-link" onclick="seeAllFeatures(); return false;">See All</a>
+                <a href="#" class="see-all-link" id="seeAllLink">See All</a>
             </div>
 
             <div class="feature-filters">
-                <button class="filter-chip active" data-filter="all" onclick="filterFeatures('all', event)">All</button>
-                <button class="filter-chip" data-filter="nearby" onclick="filterFeatures('nearby', event)">Nearby Gym</button>
-                <button class="filter-chip" data-filter="upper" onclick="filterFeatures('upper', event)">Massive Upper Body</button>
-                <button class="filter-chip" data-filter="lower" onclick="filterFeatures('lower', event)">Lower Body</button>
-                <button class="filter-chip" data-filter="track" onclick="filterFeatures('track', event)">Track Activity</button>
+                <button class="filter-chip active" data-filter="all">All</button>
+                <button class="filter-chip" data-filter="nearby">Nearby Gym</button>
+                <button class="filter-chip" data-filter="upper">Massive Upper Body</button>
+                <button class="filter-chip" data-filter="lower">Lower Body</button>
+                <button class="filter-chip" data-filter="track">Track Activity</button>
             </div>
 
             <div class="feature-cards" id="featureCards">
@@ -74,7 +72,7 @@
                     <div class="feature-card-image">
                         <div class="feature-card-overlay">
                             <h3 class="feature-card-title">Nearby<br>Gym</h3>
-                            <button class="explore-button" onclick="exploreNearbyGym()">Explore</button>
+                            <button class="explore-button" data-explore="nearby">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -83,7 +81,7 @@
                     <div class="feature-card-image">
                         <div class="feature-card-overlay">
                             <h3 class="feature-card-title">Massive Upper<br>Body</h3>
-                            <button class="explore-button" onclick="exploreMassiveUpper()">Explore</button>
+                            <button class="explore-button" data-explore="upper">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -92,7 +90,7 @@
                     <div class="feature-card-image">
                         <div class="feature-card-overlay">
                             <h3 class="feature-card-title">Lower Body<br>Workout</h3>
-                            <button class="explore-button" onclick="exploreLowerBody()">Explore</button>
+                            <button class="explore-button" data-explore="lower">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -101,7 +99,7 @@
                     <div class="feature-card-image">
                         <div class="feature-card-overlay">
                             <h3 class="feature-card-title">Track Your<br>Activity</h3>
-                            <button class="explore-button" onclick="exploreTracking()">Explore</button>
+                            <button class="explore-button" data-explore="track">Explore</button>
                         </div>
                     </div>
                 </div>
@@ -109,22 +107,22 @@
         </div>
 
         <div class="bottom-nav">
-            <div class="nav-item active" data-page="home" onclick="navigateTo('home', event)">
+            <div class="nav-item active" data-page="home">
                 <a href="./fit-map home dashboard.html">
                     <img src="./Resources/Resource Icons/icons8-home-50.png" alt="home-icon">
                 </a>
             </div>
-            <div class="nav-item" data-page="explore" onclick="navigateTo('explore', event)">
+            <div class="nav-item" data-page="explore">
                 <a href="./fit-map nearby gyms.html">
                     <img src="./Resources/Resource Icons/icons8-four-squares-50.png" alt="explore-icon">
                 </a>
             </div>
-            <div class="nav-item" data-page="location" onclick="navigateTo('location', event)">
+            <div class="nav-item" data-page="location">
                 <a href="#">
                     <img src="./Resources/Resource Icons/icons8-location-target-50.png" alt="location-icon">
                 </a>
             </div>
-            <div class="nav-item" data-page="profile" onclick="navigateTo('profile', event)">
+            <div class="nav-item" data-page="profile">
                 <a href="./fit-map user profile.html">
                     <img src="./Resources/Resource Icons/icons8-profile-50.png" alt="profile-icon">
                 </a>
@@ -133,282 +131,361 @@
     </div>
 
     <script>
-        // Check if user is logged in
-        window.addEventListener('load', function() {
-            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            
-            if (!currentUser) {
-                // No user logged in, redirect to sign in
-                window.location.href = './fit-map signin.html';
-                return;
-            }
+        (function() {
+            'use strict';
 
-            // Display user info
-            displayUserInfo(currentUser);
-            
-            // Load saved location
-            const savedLocation = localStorage.getItem('userLocation');
-            if (savedLocation) {
-                document.getElementById('select-location').value = savedLocation;
-            }
-        });
+            let storageAvailable = false;
 
-        function displayUserInfo(user) {
-            // You can add user's first name to welcome message or profile pic
-            const profilePic = document.querySelector('.profile-pic');
-            
-            // Get initials from full name
-            const nameParts = user.fullName.split(' ');
-            const initials = nameParts.map(n => n[0]).join('').toUpperCase().slice(0, 2);
-            
-            // Add initials to profile pic
-            profilePic.textContent = initials;
-            profilePic.style.display = 'flex';
-            profilePic.style.alignItems = 'center';
-            profilePic.style.justifyContent = 'center';
-            profilePic.style.fontSize = '16px';
-            profilePic.style.fontWeight = 'bold';
-            profilePic.style.cursor = 'pointer';
-        }
-
-        function goToProfile() {
-            window.location.href = './fit-map user profile.html';
-        }
-
-        function updateLocation() {
-            const locationSelect = document.getElementById('select-location');
-            const selectedLocation = locationSelect.value;
-            
-            // Save location to localStorage
-            localStorage.setItem('userLocation', selectedLocation);
-            
-            showToast(`Location updated to ${selectedLocation}`);
-        }
-
-        function showNotifications() {
-            // Show notification dropdown/modal
-            const notifications = [
-                'New gym opened near you!',
-                'Your workout plan is ready',
-                'Achievement unlocked: 7-day streak!'
+            // Gyms database
+            const gymsData = [
+                {
+                    id: 1,
+                    name: 'Sky Fitness Gym',
+                    location: 'Woji, Port Harcourt',
+                    distance: '1.4 km',
+                    description: 'Good environment and nice equipment',
+                    image: './Resources/Resource Images/1757765151611.Screenshot_20250913-113051.jpg',
+                    category: 'nearby',
+                    rating: 4.5,
+                    facilities: ['Cardio', 'Weights', 'Personal Training']
+                },
+                {
+                    id: 2,
+                    name: 'GoWellness Resort',
+                    location: 'Rumuogba, Port Harcourt',
+                    distance: '4.3 km',
+                    description: 'Large aerobic space indoor, and a complete fitness center',
+                    image: './Resources/Resource Images/1757765497532.Screenshot_20250913-113008.jpg',
+                    category: 'nearby',
+                    rating: 4.7,
+                    facilities: ['Aerobics', 'Swimming', 'Spa']
+                },
+                {
+                    id: 3,
+                    name: 'Charlie\'s Total Fitness Centre',
+                    location: 'Rumuibekwe, Port Harcourt',
+                    distance: '3.7 km',
+                    description: 'Large aerobic space indoor, and a complete fitness suite',
+                    image: './Resources/Resource Images/1757765151611.Screenshot_20250913-113051.jpg',
+                    category: 'upper',
+                    rating: 4.3,
+                    facilities: ['Upper Body Training', 'CrossFit', 'Boxing']
+                },
+                {
+                    id: 4,
+                    name: 'Gardenia\'s Gymnasium',
+                    location: 'Elelenwo, Port Harcourt',
+                    distance: '5.9 km',
+                    description: 'Captivating aerobic space indoor, and a complete setup',
+                    image: './Resources/Resource Images/1757765113098.Screenshot_20250913-113107.jpg',
+                    category: 'training',
+                    rating: 4.4,
+                    facilities: ['Group Classes', 'Personal Coaching', 'Nutrition']
+                },
+                {
+                    id: 5,
+                    name: 'Pawa Fitness Centre',
+                    location: '2nd Artillery, Port Harcourt',
+                    distance: '7.3 km',
+                    description: 'Large aerobic space indoor, and a complete gym experience',
+                    image: './Resources/Resource Images/1757765218549.1757765192791.Screenshot_20250913-113042.jpg',
+                    category: 'upper',
+                    rating: 4.6,
+                    facilities: ['Strength Training', 'HIIT', 'Functional Training']
+                }
             ];
-            
-            const message = notifications.join('\n\n');
-            alert('Notifications:\n\n' + message);
-            
-            // Remove badge after viewing
-            const badge = document.querySelector('.notification-badge');
-            if (badge) {
-                badge.style.display = 'none';
+
+            function checkStorageAvailability() {
+                try {
+                    const test = '__storage_test__';
+                    localStorage.setItem(test, test);
+                    localStorage.removeItem(test);
+                    return true;
+                } catch(e) {
+                    return false;
+                }
             }
-        }
 
-        function handleSearch(event) {
-            const searchTerm = event.target.value.toLowerCase().trim();
-            
-            if (event.key === 'Enter' && searchTerm) {
-                // Perform search
-                console.log('Searching for:', searchTerm);
-                showToast(`Searching for "${searchTerm}"...`);
-                
-                // You can redirect to a search results page
-                // window.location.href = `./search-results.html?q=${encodeURIComponent(searchTerm)}`;
-            }
-        }
+            storageAvailable = checkStorageAvailability();
 
-        function showFilters() {
-            const filters = [
-                '🏋️ Gym Type',
-                '📍 Distance',
-                '💰 Price Range',
-                '⭐ Rating',
-                '🕐 Opening Hours'
-            ];
-            
-            alert('Search Filters:\n\n' + filters.join('\n'));
-        }
-
-        function findGym() {
-            window.location.href = './fit-map nearby gyms.html';
-        }
-
-        function seeAllFeatures() {
-            // Show all features in expanded view
-            showToast('Showing all features');
-            
-            // Reset filter to show all
-            filterFeatures('all', null);
-        }
-
-        function filterFeatures(type, event) {
-            // Update active filter chip
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.classList.remove('active');
-            });
-            
-            if (event && event.target) {
-                event.target.classList.add('active');
-            } else {
-                document.querySelector(`[data-filter="${type}"]`).classList.add('active');
-            }
-            
-            // Filter feature cards
-            const cards = document.querySelectorAll('.feature-card');
-            
-            cards.forEach(card => {
-                if (type === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const category = card.getAttribute('data-category');
-                    if (category === type) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
+            const storage = {
+                getItem: function(key) {
+                    try {
+                        return storageAvailable ? localStorage.getItem(key) : sessionStorage.getItem(key);
+                    } catch(e) {
+                        return null;
+                    }
+                },
+                setItem: function(key, value) {
+                    try {
+                        if (storageAvailable) {
+                            localStorage.setItem(key, value);
+                        } else {
+                            sessionStorage.setItem(key, value);
+                        }
+                        return true;
+                    } catch(e) {
+                        return false;
                     }
                 }
+            };
+
+            // Check authentication
+            window.addEventListener('load', function() {
+                const userData = storage.getItem('currentUser');
+                const currentUser = userData ? JSON.parse(userData) : null;
+                
+                if (!currentUser) {
+                    window.location.href = './fit-map signin.html';
+                    return;
+                }
+
+                displayUserInfo(currentUser);
+                
+                const savedLocation = storage.getItem('userLocation');
+                if (savedLocation) {
+                    document.getElementById('select-location').value = savedLocation;
+                }
             });
-        }
 
-        function exploreNearbyGym() {
-            window.location.href = './fit-map nearby gyms.html';
-        }
-
-        function exploreMassiveUpper() {
-            showToast('Upper body workouts coming soon!');
-            // window.location.href = './fit-map upper-body.html';
-        }
-
-        function exploreLowerBody() {
-            showToast('Lower body workouts coming soon!');
-            // window.location.href = './fit-map lower-body.html';
-        }
-
-        function exploreTracking() {
-            showToast('Activity tracking coming soon!');
-            // window.location.href = './fit-map tracking.html';
-        }
-
-        function navigateTo(section, event) {
-            if (event) {
-                event.preventDefault();
+            function displayUserInfo(user) {
+                const profilePic = document.getElementById('profilePic');
+                const nameParts = user.fullName.split(' ');
+                const initials = nameParts.map(function(n) { return n[0]; }).join('').toUpperCase().slice(0, 2);
+                
+                profilePic.textContent = initials;
+                profilePic.style.display = 'flex';
+                profilePic.style.alignItems = 'center';
+                profilePic.style.justifyContent = 'center';
+                profilePic.style.fontSize = '16px';
+                profilePic.style.fontWeight = 'bold';
+                profilePic.style.cursor = 'pointer';
             }
-            
-            // Update active nav item
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
+
+            // Profile pic click
+            document.getElementById('profilePic').addEventListener('click', function() {
+                window.location.href = './fit-map user profile.html';
             });
-            
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            }
-            
-            // Handle navigation based on section
-            switch(section) {
-                case 'home':
-                    // Already on home
-                    break;
-                case 'explore':
-                    window.location.href = './fit-map nearby gyms.html';
-                    break;
-                case 'location':
-                    showToast('Location features coming soon!');
-                    break;
-                case 'profile':
-                    window.location.href = './fit-map user profile.html';
-                    break;
-            }
-        }
 
-        function showToast(message) {
-            // Remove existing toast
-            const existingToast = document.querySelector('.toast-message');
-            if (existingToast) {
-                existingToast.remove();
-            }
-            
-            // Create toast
-            const toast = document.createElement('div');
-            toast.className = 'toast-message';
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 12px 24px;
-                border-radius: 25px;
-                font-size: 14px;
-                z-index: 9999;
-                animation: slideUp 0.3s ease-out;
-            `;
-            toast.textContent = message;
-            
-            document.body.appendChild(toast);
-            
-            // Remove after 3 seconds
-            setTimeout(() => {
-                toast.style.animation = 'slideDown 0.3s ease-out';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
+            // Location change
+            document.getElementById('select-location').addEventListener('change', function() {
+                const selectedLocation = this.value;
+                storage.setItem('userLocation', selectedLocation);
+                showToast('Location updated to ' + selectedLocation);
+            });
 
-        // Add CSS animation for toast
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideUp {
-                from {
-                    bottom: 50px;
-                    opacity: 0;
-                }
-                to {
-                    bottom: 100px;
-                    opacity: 1;
-                }
-            }
+            // Notifications
+            document.getElementById('notificationBtn').addEventListener('click', function() {
+                const notifications = [
+                    'New gym opened near you!',
+                    'Your workout plan is ready',
+                    'Achievement unlocked: 7-day streak!'
+                ];
+                alert('Notifications:\n\n' + notifications.join('\n\n'));
+                this.querySelector('.notification-badge').style.display = 'none';
+            });
+
+            // SEARCH FUNCTIONALITY
+            const searchInput = document.getElementById('searchInput');
             
-            @keyframes slideDown {
-                from {
-                    bottom: 100px;
-                    opacity: 1;
+            searchInput.addEventListener('keyup', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch(this.value.trim());
                 }
-                to {
-                    bottom: 50px;
-                    opacity: 0;
+            });
+
+            function performSearch(searchTerm) {
+                if (!searchTerm) {
+                    showToast('Please enter a search term');
+                    return;
+                }
+
+                const lowerSearch = searchTerm.toLowerCase();
+                const results = gymsData.filter(function(gym) {
+                    return gym.name.toLowerCase().includes(lowerSearch) ||
+                           gym.location.toLowerCase().includes(lowerSearch) ||
+                           gym.description.toLowerCase().includes(lowerSearch) ||
+                           gym.facilities.some(function(f) { return f.toLowerCase().includes(lowerSearch); });
+                });
+
+                if (results.length > 0) {
+                    storage.setItem('searchResults', JSON.stringify(results));
+                    storage.setItem('searchTerm', searchTerm);
+                    window.location.href = './fit-map nearby gyms.html?search=true';
+                } else {
+                    showToast('No gyms found for "' + searchTerm + '"');
                 }
             }
 
-            .notification-wrapper {
-                position: relative;
-                cursor: pointer;
+            // FILTER FUNCTIONALITY
+            document.getElementById('filterBtn').addEventListener('click', function() {
+                showFilterModal();
+            });
+
+            function showFilterModal() {
+                const modal = document.createElement('div');
+                modal.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 10000; display: flex; align-items: center; justify-content: center;';
+                
+                modal.innerHTML = `
+                    <div style="background: white; border-radius: 16px; padding: 24px; max-width: 320px; width: 90%;">
+                        <h3 style="margin: 0 0 20px 0; font-size: 20px; color: #333;">Search Filters</h3>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Distance</label>
+                            <select id="distanceFilter" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="all">All Distances</option>
+                                <option value="2">Within 2 km</option>
+                                <option value="5">Within 5 km</option>
+                                <option value="10">Within 10 km</option>
+                            </select>
+                        </div>
+                        
+                        <div style="margin-bottom: 16px;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #555;">Rating</label>
+                            <select id="ratingFilter" style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 8px;">
+                                <option value="all">All Ratings</option>
+                                <option value="4">4+ Stars</option>
+                                <option value="4.5">4.5+ Stars</option>
+                            </select>
+                        </div>
+                        
+                        <div style="display: flex; gap: 12px; margin-top: 24px;">
+                            <button id="cancelFilter" style="flex: 1; padding: 12px; border: 1px solid #ddd; border-radius: 8px; background: white; cursor: pointer;">Cancel</button>
+                            <button id="applyFilter" style="flex: 1; padding: 12px; border: none; border-radius: 8px; background: linear-gradient(135deg, #271c65, #8f64d8); color: white; cursor: pointer;">Apply</button>
+                        </div>
+                    </div>
+                `;
+                
+                document.body.appendChild(modal);
+                
+                document.getElementById('cancelFilter').addEventListener('click', function() {
+                    modal.remove();
+                });
+                
+                document.getElementById('applyFilter').addEventListener('click', function() {
+                    const distance = document.getElementById('distanceFilter').value;
+                    const rating = document.getElementById('ratingFilter').value;
+                    applyFilters(distance, rating);
+                    modal.remove();
+                });
             }
 
-            .notification-badge {
-                position: absolute;
-                top: -5px;
-                right: -5px;
-                background-color: #ff4444;
-                color: white;
-                border-radius: 50%;
-                width: 18px;
-                height: 18px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 11px;
-                font-weight: bold;
+            function applyFilters(distance, rating) {
+                let filtered = gymsData;
+                
+                if (distance !== 'all') {
+                    const maxDist = parseFloat(distance);
+                    filtered = filtered.filter(function(gym) {
+                        return parseFloat(gym.distance) <= maxDist;
+                    });
+                }
+                
+                if (rating !== 'all') {
+                    const minRating = parseFloat(rating);
+                    filtered = filtered.filter(function(gym) {
+                        return gym.rating >= minRating;
+                    });
+                }
+                
+                if (filtered.length > 0) {
+                    storage.setItem('searchResults', JSON.stringify(filtered));
+                    storage.setItem('searchTerm', 'Filtered Results');
+                    window.location.href = './fit-map nearby gyms.html?search=true';
+                } else {
+                    showToast('No gyms match the selected filters');
+                }
             }
 
-            .profile-pic {
-                cursor: pointer;
-                transition: transform 0.2s;
+            // Find Gym button
+            document.getElementById('findGymBtn').addEventListener('click', function() {
+                window.location.href = './fit-map nearby gyms.html';
+            });
+
+            // See All link
+            document.getElementById('seeAllLink').addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast('Showing all features');
+                filterFeatures('all');
+            });
+
+            // Feature filter chips
+            const filterChips = document.querySelectorAll('.filter-chip');
+            filterChips.forEach(function(chip) {
+                chip.addEventListener('click', function() {
+                    const filter = this.getAttribute('data-filter');
+                    filterFeatures(filter);
+                });
+            });
+
+            function filterFeatures(type) {
+                filterChips.forEach(function(chip) {
+                    chip.classList.remove('active');
+                });
+                
+                document.querySelector('[data-filter="' + type + '"]').classList.add('active');
+                
+                const cards = document.querySelectorAll('.feature-card');
+                cards.forEach(function(card) {
+                    if (type === 'all') {
+                        card.style.display = 'block';
+                    } else {
+                        const category = card.getAttribute('data-category');
+                        card.style.display = (category === type) ? 'block' : 'none';
+                    }
+                });
             }
 
-            .profile-pic:hover {
-                transform: scale(1.1);
+            // Explore buttons
+            const exploreButtons = document.querySelectorAll('.explore-button');
+            exploreButtons.forEach(function(btn) {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const type = this.getAttribute('data-explore');
+                    
+                    if (type === 'nearby') {
+                        window.location.href = './fit-map nearby gyms.html';
+                    } else {
+                        showToast(type.charAt(0).toUpperCase() + type.slice(1) + ' workouts coming soon!');
+                    }
+                });
+            });
+
+            // Navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    const page = this.getAttribute('data-page');
+                    if (page === 'location') {
+                        e.preventDefault();
+                        showToast('Location features coming soon!');
+                    }
+                });
+            });
+
+            function showToast(message) {
+                const existingToast = document.querySelector('.toast-message');
+                if (existingToast) {
+                    existingToast.remove();
+                }
+                
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.style.cssText = 'position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.8); color: white; padding: 12px 24px; border-radius: 25px; font-size: 14px; z-index: 9999; animation: slideUp 0.3s ease-out;';
+                toast.textContent = message;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(function() {
+                    toast.style.animation = 'slideDown 0.3s ease-out';
+                    setTimeout(function() { toast.remove(); }, 300);
+                }, 3000);
             }
-        `;
-        document.head.appendChild(style);
+
+            // Add animations
+            const style = document.createElement('style');
+            style.textContent = '@keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 100px; opacity: 1; } } @keyframes slideDown { from { bottom: 100px; opacity: 1; } to { bottom: 50px; opacity: 0; } } .profile-pic { cursor: pointer; transition: transform 0.2s; } .profile-pic:hover { transform: scale(1.1); }';
+            document.head.appendChild(style);
+        })();
     </script>
 </body>
 </html>

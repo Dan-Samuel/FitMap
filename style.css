@@ -132,7 +132,7 @@ body {
         }
 
         .dumbbell-icon {
-            width: 60%;
+            width: 80%;
             position: relative;
         }
 
@@ -141,7 +141,7 @@ body {
             height: 100%;
             fill: white;
             filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-        }
+       }
 
         .app-name {
             font-size: 48px;
@@ -198,16 +198,16 @@ body {
         }
 
         /* Slide 1: Book a Gym */
-        .slide-1 {
+        /* .slide-1 {
             background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
-        }
+        } */
 
         .slide-1 .background-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             background: url('./Resources/Resource Images/1757808096935.1757765497532.Screenshot_20250913-113008-2.jpg') center/cover;
         }
 
@@ -217,8 +217,8 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(26, 26, 46, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
+            height: 50%;
+            /* background: linear-gradient(180deg, rgba(26, 26, 46, 0.3) 0%, rgba(0, 0, 0, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%); */
         }
 
         /* Slide 2: Find your Trainer */
@@ -231,7 +231,7 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             background: url('./Resources/Resource Images/1757808259051.1757808194330.1757765627197.Screenshot_20250913-112859-2.jpg') center/cover;
         }
 
@@ -241,21 +241,21 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(124, 58, 237, 0.3) 0%, rgba(168, 85, 247, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
+            height: 50%;
+            /* background: linear-gradient(180deg, rgba(124, 58, 237, 0.3) 0%, rgba(168, 85, 247, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%); */
         }
 
         /* Slide 3: Track Your Activity */
-        .slide-3 {
+        /* .slide-3 {
             background: linear-gradient(135deg, #dc2626, #e11d48, #be185d);
-        }
+        } */
 
         .slide-3 .background-image {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             background: url('./Resources/Resource Images/1757808417595.1757765560475.Screenshot_20250913-112924-2.jpg') center/cover;
         }
 
@@ -265,8 +265,8 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            background: linear-gradient(180deg, rgba(220, 38, 38, 0.3) 0%, rgba(225, 29, 72, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
+            height: 50%;
+            /* background: linear-gradient(180deg, rgba(220, 38, 38, 0.3) 0%, rgba(225, 29, 72, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%); */
         }
 
         /* Slide 4: User Type Selection */
@@ -279,7 +279,7 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             background: url('./Resources/Resource Images/1757808560956.1757765600658.1757765588450.Screenshot_20250913-112916-2.jpg') center/cover;
         }
 
@@ -289,7 +289,7 @@ body {
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
+            height: 50%;
             background: linear-gradient(180deg, rgba(76, 29, 149, 0.4) 0%, rgba(124, 58, 237, 0.2) 50%, rgba(255, 255, 255, 0.1) 100%);
         }
 
@@ -317,10 +317,10 @@ body {
             padding: 40px 30px 40px;
             text-align: center;
             z-index: 5;
-            min-height: 320px;
+            min-height: 280px;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: space-evenly;
         }
 
         .content-text {
@@ -559,9 +559,9 @@ body {
             content: '✓';
             position: absolute;
             color: white;
-            font-size: 12px;
+            font-size: 16px;
             top: -2px;
-            left: 2px;
+            left: 4px;
         }
 
         .terms-text {
@@ -695,9 +695,9 @@ body {
             content: '✓';
             position: absolute;
             color: white;
-            font-size: 12px;
+            font-size: 16px;
             top: -2px;
-            left: 2px;
+            left: 4px;
         }
 
         .remember-text {
@@ -727,7 +727,19 @@ body {
         .signin-button:active {
             transform: translateY(0);
         }
-
+        
+        .signup-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 5px;
+        }
+        
+        .signup-link a {
+            text-decoration: none;
+        }
+            
         .divider {
             text-align: center;
             margin: 30px 0;
@@ -1308,12 +1320,10 @@ body {
             width: 90%;
         }
 
-        .notification-icon {
+        #notification-bell {
             width: 24px;
             height: 24px;
-            stroke: var(--secndary-accent-color);
             cursor: pointer;
-            margin-top: 16px;
         }
 
         .search-container {
@@ -1498,6 +1508,7 @@ body {
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             position: relative;
             height: 200px;
+            margin-bottom: 10px;
         }
 
         .feature-card-image {
@@ -1667,7 +1678,7 @@ body {
             display: flex;
             flex-direction: column;
             gap: 16px;
-            margin-bottom: 40px;
+            margin-bottom: 180px;
         }
 
         .gym-card {
@@ -1773,8 +1784,8 @@ body {
         }
 
         .edit-button {
-            width: 28px;
-            height: 28px;
+            width: 20px;
+            height: 20px;
             display: flex;
             align-items: center;
             justify-content: center;

@@ -5,14 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FitMap - Profile</title>
     <link rel="stylesheet" href="./style.css">
+    <style>
+        /* Additional fixes for profile page */
+        .settings-item:last-child {
+            margin-top: 40px;
+            margin-bottom: 120px !important; /* Increased from 80px to clear the navbar */
+            position: relative;
+            z-index: 1;
+        }
+
+        .settings-section {
+            padding-bottom: 20px;
+        }
+
+        /* Ensure logout button is always clickable */
+        .logout-item {
+            pointer-events: auto;
+            touch-action: manipulation;
+        }
+
+        /* Add visual feedback for better UX */
+        .settings-item:active {
+            transform: scale(0.98);
+        }
+
+        .logout-item:hover {
+            background: rgba(255, 0, 0, 0.05) !important;
+        }
+    </style>
 </head>
 <body>
     <div id="user-profile-page-bg">
         <div class="user-profile-header">
-            <div class="user-profile-back-button" onclick="goBack()">
+            <div class="user-profile-back-button" id="backButton">
                 <img src="./Resources/Resource Icons/icons8-back-arrow-50.png" alt="back-arrow">
             </div>
-            <div class="edit-button" onclick="editProfile()">
+            <div class="edit-button" id="editButton">
                 <img src="./Resources/Resource Icons/icons8-edit-50.png" alt="edit-icon">
             </div>
         </div>
@@ -52,7 +80,7 @@
         <div class="fitness-section">
             <h2 class="section-title">Fitness Information</h2>
             <div class="fitness-cards">
-                <div class="fitness-card" onclick="editFitness('weight')">
+                <div class="fitness-card" id="weightCard">
                     <div class="fitness-card-left">
                         <div class="fitness-icon">
                             <img src="./Resources/Resource Icons/icons8-dumbell-50.png" alt="dumbell">
@@ -65,14 +93,14 @@
                     <img src="./Resources/Resource Icons/icons8-edit-50.png" alt="edit-icon">
                 </div>
 
-                <div class="fitness-card" onclick="editFitness('goal')">
+                <div class="fitness-card" id="goalCard">
                     <div class="fitness-card-left">
                         <div class="fitness-icon">
                             <img src="./Resources/Resource Icons/icons8-goal-50.png" alt="goal-icon">
                         </div>
                         <div class="fitness-info">
                             <div class="fitness-label">Goal</div>
-                            <div class="fitness-value" id="userGoal">Loose Weight</div>
+                            <div class="fitness-value" id="userGoal">Lose Weight</div>
                         </div>
                     </div>
                     <img src="./Resources/Resource Icons/icons8-edit-50.png" alt="edit-icon">
@@ -83,7 +111,7 @@
         <div class="settings-section">
             <h2 class="section-title">Account Settings</h2>
             <div class="settings-list">
-                <div class="settings-item" onclick="navigateToSettings('personal')">
+                <div class="settings-item" id="personalInfo">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
@@ -95,7 +123,7 @@
                     </svg>
                 </div>
 
-                <div class="settings-item" onclick="navigateToSettings('password')">
+                <div class="settings-item" id="changePassword">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
@@ -108,7 +136,7 @@
                     </svg>
                 </div>
 
-                <div class="settings-item" onclick="navigateToSettings('language')">
+                <div class="settings-item" id="languageSettings">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"></path>
@@ -120,7 +148,7 @@
                     </svg>
                 </div>
 
-                <div class="settings-item" onclick="navigateToSettings('privacy')">
+                <div class="settings-item" id="privacySettings">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
@@ -132,7 +160,7 @@
                     </svg>
                 </div>
 
-                <div class="settings-item" onclick="navigateToSettings('help')">
+                <div class="settings-item" id="helpSupport">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192L5.636 18.364M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"></path>
@@ -144,7 +172,7 @@
                     </svg>
                 </div>
 
-                <div class="settings-item logout-item" onclick="logout()">
+                <div class="settings-item logout-item" id="logoutButton">
                     <div class="settings-item-left">
                         <svg class="settings-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
@@ -156,22 +184,22 @@
         </div>
 
         <div class="bottom-nav">
-            <div class="nav-item" data-page="home" onclick="navigateTo('home', event)">
+            <div class="nav-item" data-page="home">
                 <a href="./fit-map home dashboard.html">
                     <img src="./Resources/Resource Icons/icons8-home-50.png" alt="home-icon">
                 </a>
             </div>
-            <div class="nav-item" data-page="explore" onclick="navigateTo('explore', event)">
+            <div class="nav-item" data-page="explore">
                 <a href="./fit-map nearby gyms.html">
                     <img src="./Resources/Resource Icons/icons8-four-squares-50.png" alt="explore-icon">
                 </a>
             </div>
-            <div class="nav-item" data-page="location" onclick="navigateTo('location', event)">
+            <div class="nav-item" data-page="location">
                 <a href="#">
                     <img src="./Resources/Resource Icons/icons8-location-target-50.png" alt="location-icon">
                 </a>
             </div>
-            <div class="nav-item active" data-page="profile" onclick="navigateTo('profile', event)">
+            <div class="nav-item active" data-page="profile">
                 <a href="./fit-map user profile.html">
                     <img src="./Resources/Resource Icons/icons8-profile-50.png" alt="profile-icon">
                 </a>
@@ -180,284 +208,288 @@
     </div>
 
     <script>
-        let currentUser = null;
+        (function() {
+            'use strict';
 
-        // Load user data on page load
-        window.addEventListener('load', function() {
-            currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-            
-            if (!currentUser) {
-                window.location.href = './fit-map signin.html';
-                return;
-            }
+            let currentUser = null;
+            let storageAvailable = false;
 
-            // Display user information
-            loadUserProfile();
-            
-            // Set active nav item
-            setActiveNavItem('profile');
-        });
-
-        function loadUserProfile() {
-            // Display user's name
-            document.getElementById('profileName').textContent = currentUser.fullName;
-            
-            // Display user's email
-            document.getElementById('userEmail').textContent = currentUser.email;
-            
-            // Display profile pic with initials
-            const profilePic = document.getElementById('userProfilePic');
-            const nameParts = currentUser.fullName.split(' ');
-            const initials = nameParts.map(n => n[0]).join('').toUpperCase().slice(0, 2);
-            
-            profilePic.textContent = initials;
-            profilePic.style.display = 'flex';
-            profilePic.style.alignItems = 'center';
-            profilePic.style.justifyContent = 'center';
-            profilePic.style.fontSize = '32px';
-            profilePic.style.fontWeight = 'bold';
-            
-            // Load fitness data from localStorage if exists
-            const fitnessData = JSON.parse(localStorage.getItem('fitnessData_' + currentUser.id) || 'null');
-            
-            if (fitnessData) {
-                if (fitnessData.weight) {
-                    document.getElementById('userWeight').textContent = fitnessData.weight + ' kg';
-                }
-                if (fitnessData.goal) {
-                    document.getElementById('userGoal').textContent = fitnessData.goal;
+            // Check if localStorage is available
+            function checkStorageAvailability() {
+                try {
+                    const test = '__storage_test__';
+                    localStorage.setItem(test, test);
+                    localStorage.removeItem(test);
+                    return true;
+                } catch(e) {
+                    return false;
                 }
             }
-            
-            // Load location if saved
-            const savedLocation = localStorage.getItem('userLocation');
-            if (savedLocation) {
-                document.getElementById('userLocation').textContent = savedLocation + ', Nigeria';
-            }
-            
-            // Load phone if saved
-            const savedPhone = localStorage.getItem('userPhone_' + currentUser.id);
-            if (savedPhone) {
-                document.getElementById('userPhone').textContent = savedPhone;
-            }
-        }
 
-        function goBack() {
-            window.history.back();
-        }
+            // Initialize storage check
+            storageAvailable = checkStorageAvailability();
 
-        function editProfile() {
-            const newName = prompt('Enter your full name:', currentUser.fullName);
-            
-            if (newName && newName.trim()) {
-                currentUser.fullName = newName.trim();
-                
-                // Update in users array
-                const users = JSON.parse(localStorage.getItem('fitMapUsers') || '[]');
-                const userIndex = users.findIndex(u => u.id === currentUser.id);
-                
-                if (userIndex !== -1) {
-                    users[userIndex].fullName = newName.trim();
-                    localStorage.setItem('fitMapUsers', JSON.stringify(users));
+            if (!storageAvailable) {
+                console.warn('localStorage is not available. Using session storage fallback.');
+            }
+
+            // Storage wrapper with fallback
+            const storage = {
+                getItem: function(key) {
+                    try {
+                        if (storageAvailable) {
+                            return localStorage.getItem(key);
+                        } else {
+                            return sessionStorage.getItem(key);
+                        }
+                    } catch(e) {
+                        console.error('Storage read error:', e);
+                        return null;
+                    }
+                },
+                setItem: function(key, value) {
+                    try {
+                        if (storageAvailable) {
+                            localStorage.setItem(key, value);
+                        } else {
+                            sessionStorage.setItem(key, value);
+                        }
+                        return true;
+                    } catch(e) {
+                        console.error('Storage write error:', e);
+                        return false;
+                    }
+                },
+                removeItem: function(key) {
+                    try {
+                        if (storageAvailable) {
+                            localStorage.removeItem(key);
+                        } else {
+                            sessionStorage.removeItem(key);
+                        }
+                    } catch(e) {
+                        console.error('Storage remove error:', e);
+                    }
                 }
-                
-                // Update current user
-                localStorage.setItem('currentUser', JSON.stringify(currentUser));
-                
-                // Reload profile
-                loadUserProfile();
-                showToast('Profile updated successfully!');
-            }
-        }
+            };
 
-        function editFitness(type) {
-            const fitnessData = JSON.parse(localStorage.getItem('fitnessData_' + currentUser.id) || '{}');
-            
-            if (type === 'weight') {
-                const currentWeight = fitnessData.weight || '89';
-                const newWeight = prompt('Enter your weight (kg):', currentWeight);
-                
-                if (newWeight && !isNaN(newWeight) && parseFloat(newWeight) > 0) {
-                    fitnessData.weight = parseFloat(newWeight);
-                    localStorage.setItem('fitnessData_' + currentUser.id, JSON.stringify(fitnessData));
-                    document.getElementById('userWeight').textContent = newWeight + ' kg';
-                    showToast('Weight updated successfully!');
-                } else if (newWeight) {
-                    showToast('Please enter a valid weight');
-                }
-            } else if (type === 'goal') {
-                const goals = ['Lose Weight', 'Gain Muscle', 'Stay Fit', 'Build Strength', 'Improve Endurance'];
-                const currentGoal = fitnessData.goal || 'Lose Weight';
-                
-                const goalOptions = goals.map((g, i) => `${i + 1}. ${g}`).join('\n');
-                const choice = prompt(`Select your fitness goal:\n\n${goalOptions}\n\nEnter number (1-5):`, '1');
-                
-                if (choice && parseInt(choice) >= 1 && parseInt(choice) <= 5) {
-                    const selectedGoal = goals[parseInt(choice) - 1];
-                    fitnessData.goal = selectedGoal;
-                    localStorage.setItem('fitnessData_' + currentUser.id, JSON.stringify(fitnessData));
-                    document.getElementById('userGoal').textContent = selectedGoal;
-                    showToast('Goal updated successfully!');
-                } else if (choice) {
-                    showToast('Please enter a number between 1 and 5');
-                }
-            }
-        }
+            // Load user data on page load
+            window.addEventListener('load', function() {
+                try {
+                    const userData = storage.getItem('currentUser');
+                    currentUser = userData ? JSON.parse(userData) : null;
+                    
+                    if (!currentUser) {
+                        window.location.href = './fit-map signin.html';
+                        return;
+                    }
 
-        function navigateToSettings(section) {
-            switch(section) {
-                case 'personal':
-                    editProfile();
-                    break;
-                case 'password':
-                    window.location.href = './fit-map reset password.html';
-                    break;
-                case 'language':
-                    showToast('Language settings coming soon!');
-                    break;
-                case 'privacy':
-                    showToast('Privacy settings coming soon!');
-                    break;
-                case 'help':
-                    const helpMessage = `FitMap Help & Support\n\n` +
-                        `📧 Email: support@fitmap.com\n` +
-                        `📱 Phone: +234-704-189-4367\n` +
-                        `🌐 Website: www.fitmap.com\n\n` +
-                        `We're here to help you achieve your fitness goals!`;
-                    alert(helpMessage);
-                    break;
-            }
-        }
-
-        function logout() {
-            if (confirm('Are you sure you want to log out?')) {
-                // Clear current user
-                localStorage.removeItem('currentUser');
-                
-                showToast('Logged out successfully');
-                
-                // Redirect to sign in page
-                setTimeout(() => {
+                    loadUserProfile();
+                    setActiveNavItem('profile');
+                } catch(e) {
+                    console.error('Error loading user data:', e);
                     window.location.href = './fit-map signin.html';
-                }, 1000);
-            }
-        }
-
-        function navigateTo(section, event) {
-            if (event) {
-                event.preventDefault();
-            }
-            
-            // Update active nav item
-            setActiveNavItem(section);
-            
-            // Handle navigation
-            switch(section) {
-                case 'home':
-                    window.location.href = './fit-map home dashboard.html';
-                    break;
-                case 'explore':
-                    window.location.href = './fit-map nearby gyms.html';
-                    break;
-                case 'location':
-                    showToast('Location features coming soon!');
-                    break;
-                case 'profile':
-                    // Already on profile page
-                    break;
-            }
-        }
-
-        function setActiveNavItem(page) {
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
+                }
             });
-            
-            const activeItem = document.querySelector(`[data-page="${page}"]`);
-            if (activeItem) {
-                activeItem.classList.add('active');
-            }
-        }
 
-        function showToast(message) {
-            const existingToast = document.querySelector('.toast-message');
-            if (existingToast) {
-                existingToast.remove();
-            }
-            
-            const toast = document.createElement('div');
-            toast.className = 'toast-message';
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 100px;
-                left: 50%;
-                transform: translateX(-50%);
-                background-color: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 12px 24px;
-                border-radius: 25px;
-                font-size: 14px;
-                z-index: 9999;
-                animation: slideUp 0.3s ease-out;
-            `;
-            toast.textContent = message;
-            
-            document.body.appendChild(toast);
-            
-            setTimeout(() => {
-                toast.style.animation = 'slideDown 0.3s ease-out';
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        // Add CSS animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes slideUp {
-                from {
-                    bottom: 50px;
-                    opacity: 0;
+            function loadUserProfile() {
+                document.getElementById('profileName').textContent = currentUser.fullName;
+                document.getElementById('userEmail').textContent = currentUser.email;
+                
+                const profilePic = document.getElementById('userProfilePic');
+                const nameParts = currentUser.fullName.split(' ');
+                const initials = nameParts.map(function(n) { return n[0]; }).join('').toUpperCase().slice(0, 2);
+                
+                profilePic.textContent = initials;
+                profilePic.style.display = 'flex';
+                profilePic.style.alignItems = 'center';
+                profilePic.style.justifyContent = 'center';
+                profilePic.style.fontSize = '32px';
+                profilePic.style.fontWeight = 'bold';
+                
+                const fitnessData = storage.getItem('fitnessData_' + currentUser.id);
+                if (fitnessData) {
+                    const fitness = JSON.parse(fitnessData);
+                    if (fitness.weight) {
+                        document.getElementById('userWeight').textContent = fitness.weight + ' kg';
+                    }
+                    if (fitness.goal) {
+                        document.getElementById('userGoal').textContent = fitness.goal;
+                    }
                 }
-                to {
-                    bottom: 100px;
-                    opacity: 1;
+                
+                const savedLocation = storage.getItem('userLocation');
+                if (savedLocation) {
+                    document.getElementById('userLocation').textContent = savedLocation + ', Nigeria';
                 }
-            }
-            
-            @keyframes slideDown {
-                from {
-                    bottom: 100px;
-                    opacity: 1;
-                }
-                to {
-                    bottom: 50px;
-                    opacity: 0;
+                
+                const savedPhone = storage.getItem('userPhone_' + currentUser.id);
+                if (savedPhone) {
+                    document.getElementById('userPhone').textContent = savedPhone;
                 }
             }
 
-            .settings-item {
-                cursor: pointer;
-                transition: background-color 0.2s;
+            // Back button
+            document.getElementById('backButton').addEventListener('click', function() {
+                window.history.back();
+            });
+
+            // Edit profile button
+            document.getElementById('editButton').addEventListener('click', function() {
+                editProfile();
+            });
+
+            function editProfile() {
+                const newName = prompt('Enter your full name:', currentUser.fullName);
+                
+                if (newName && newName.trim()) {
+                    currentUser.fullName = newName.trim();
+                    
+                    const usersData = storage.getItem('fitMapUsers');
+                    const users = usersData ? JSON.parse(usersData) : [];
+                    const userIndex = users.findIndex(function(u) { return u.id === currentUser.id; });
+                    
+                    if (userIndex !== -1) {
+                        users[userIndex].fullName = newName.trim();
+                        storage.setItem('fitMapUsers', JSON.stringify(users));
+                    }
+                    
+                    storage.setItem('currentUser', JSON.stringify(currentUser));
+                    loadUserProfile();
+                    showToast('Profile updated successfully!');
+                }
             }
 
-            .settings-item:hover {
-                background-color: rgba(0,0,0,0.05);
+            // Fitness cards
+            document.getElementById('weightCard').addEventListener('click', function() {
+                editFitness('weight');
+            });
+
+            document.getElementById('goalCard').addEventListener('click', function() {
+                editFitness('goal');
+            });
+
+            function editFitness(type) {
+                const fitnessDataStr = storage.getItem('fitnessData_' + currentUser.id);
+                const fitnessData = fitnessDataStr ? JSON.parse(fitnessDataStr) : {};
+                
+                if (type === 'weight') {
+                    const currentWeight = fitnessData.weight || '89';
+                    const newWeight = prompt('Enter your weight (kg):', currentWeight);
+                    
+                    if (newWeight && !isNaN(newWeight) && parseFloat(newWeight) > 0) {
+                        fitnessData.weight = parseFloat(newWeight);
+                        storage.setItem('fitnessData_' + currentUser.id, JSON.stringify(fitnessData));
+                        document.getElementById('userWeight').textContent = newWeight + ' kg';
+                        showToast('Weight updated successfully!');
+                    } else if (newWeight) {
+                        showToast('Please enter a valid weight');
+                    }
+                } else if (type === 'goal') {
+                    const goals = ['Lose Weight', 'Gain Muscle', 'Stay Fit', 'Build Strength', 'Improve Endurance'];
+                    const goalOptions = goals.map(function(g, i) { return (i + 1) + '. ' + g; }).join('\n');
+                    const choice = prompt('Select your fitness goal:\n\n' + goalOptions + '\n\nEnter number (1-5):', '1');
+                    
+                    if (choice && parseInt(choice) >= 1 && parseInt(choice) <= 5) {
+                        const selectedGoal = goals[parseInt(choice) - 1];
+                        fitnessData.goal = selectedGoal;
+                        storage.setItem('fitnessData_' + currentUser.id, JSON.stringify(fitnessData));
+                        document.getElementById('userGoal').textContent = selectedGoal;
+                        showToast('Goal updated successfully!');
+                    } else if (choice) {
+                        showToast('Please enter a number between 1 and 5');
+                    }
+                }
             }
 
-            .logout-item:hover {
-                background-color: rgba(255,0,0,0.05);
+            // Settings items
+            document.getElementById('personalInfo').addEventListener('click', function() {
+                editProfile();
+            });
+
+            document.getElementById('changePassword').addEventListener('click', function() {
+                window.location.href = './fit-map reset password.html';
+            });
+
+            document.getElementById('languageSettings').addEventListener('click', function() {
+                showToast('Language settings coming soon!');
+            });
+
+            document.getElementById('privacySettings').addEventListener('click', function() {
+                showToast('Privacy settings coming soon!');
+            });
+
+            document.getElementById('helpSupport').addEventListener('click', function() {
+                const helpMessage = 'FitMap Help & Support\n\n' +
+                    'Email: support@fitmap.com\n' +
+                    'Phone: +234-704-189-4367\n' +
+                    'Website: www.fitmap.com\n\n' +
+                    'We\'re here to help you achieve your fitness goals!';
+                alert(helpMessage);
+            });
+
+            // LOGOUT BUTTON - FIXED
+            document.getElementById('logoutButton').addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                
+                if (confirm('Are you sure you want to log out?')) {
+                    storage.removeItem('currentUser');
+                    showToast('Logged out successfully');
+                    
+                    setTimeout(function() {
+                        window.location.href = './fit-map signin.html';
+                    }, 1000);
+                }
+            });
+
+            // Navigation
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(function(item) {
+                item.addEventListener('click', function(e) {
+                    const page = this.getAttribute('data-page');
+                    if (page === 'location') {
+                        e.preventDefault();
+                        showToast('Location features coming soon!');
+                    }
+                });
+            });
+
+            function setActiveNavItem(page) {
+                document.querySelectorAll('.nav-item').forEach(function(item) {
+                    item.classList.remove('active');
+                });
+                
+                const activeItem = document.querySelector('[data-page="' + page + '"]');
+                if (activeItem) {
+                    activeItem.classList.add('active');
+                }
             }
 
-            .fitness-card {
-                cursor: pointer;
-                transition: transform 0.2s;
+            function showToast(message) {
+                const existingToast = document.querySelector('.toast-message');
+                if (existingToast) {
+                    existingToast.remove();
+                }
+                
+                const toast = document.createElement('div');
+                toast.className = 'toast-message';
+                toast.style.cssText = 'position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); background-color: rgba(0, 0, 0, 0.8); color: white; padding: 12px 24px; border-radius: 25px; font-size: 14px; z-index: 9999; animation: slideUp 0.3s ease-out;';
+                toast.textContent = message;
+                
+                document.body.appendChild(toast);
+                
+                setTimeout(function() {
+                    toast.style.animation = 'slideDown 0.3s ease-out';
+                    setTimeout(function() { toast.remove(); }, 300);
+                }, 3000);
             }
 
-            .fitness-card:hover {
-                transform: translateY(-3px);
-            }
-        `;
-        document.head.appendChild(style);
+            // Add CSS animations
+            const style = document.createElement('style');
+            style.textContent = '@keyframes slideUp { from { bottom: 50px; opacity: 0; } to { bottom: 100px; opacity: 1; } } @keyframes slideDown { from { bottom: 100px; opacity: 1; } to { bottom: 50px; opacity: 0; } }';
+            document.head.appendChild(style);
+        })();
     </script>
 </body>
 </html>
