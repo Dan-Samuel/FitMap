@@ -497,7 +497,7 @@ body {
         }
 
         .signup-button {
-            width: 60%;
+            width: 50%;
             background: var(--tertiary-color);
             color: var(--background-color);
             border: none;
@@ -590,12 +590,12 @@ body {
 
         .social-button {
             margin-left: 25%;
-            width: 60%;
+            width: 50%;
             background: white;
             border: 1px solid var(--secondary-text-color);
             border-radius: 25px;
             padding: 12px 16px;
-            font-size: 10px;
+            font-size: 6px;
             cursor: pointer;
             display: flex;
             align-items: center;
