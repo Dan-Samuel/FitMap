@@ -534,7 +534,7 @@ body {
 
         .terms-container {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             gap: 12px;
             margin-bottom: 30px;
             margin-left: 15%;
