@@ -7,12 +7,23 @@
     *{
         box-sizing:border-box
     }
-    html,body{
+    html {
         height:100%;
         margin:0;
         font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
          background:white;
         }
+
+    body {
+        font-family: 'lora-regular', sans-serif;
+        height: 100vh;
+        overflow-x: hidden;
+        max-width: 480px;
+        margin: 0 auto;
+        /* background: #f8f7fa; */
+        background: #000000;
+    }
+
 
     /* Page layout */
     .screen{
@@ -32,7 +43,7 @@
       right:18px;
       top:18px;
       color:white;
-      font-weight:600;
+      font-weight:400;
       z-index:8;
       opacity:.95;
       cursor:pointer;
@@ -74,7 +85,7 @@
         font-family:Merriweather, serif;
         margin:6px 0 8px;
         color:#0b0830;
-        font-size:32px;
+        font-size: 24px;
         font-weight: bold;
     }
     p.lead{
@@ -140,4 +151,5 @@
       h1{
         font-size:24px
     }
+
     }
