@@ -590,7 +590,7 @@ body {
 
         .social-button {
             margin-left: 25%;
-            width: 70%;
+            width: 100%;
             background: white;
             border: 1px solid var(--secondary-text-color);
             border-radius: 25px;
