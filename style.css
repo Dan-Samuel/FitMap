@@ -538,7 +538,7 @@ body {
             text-align: center;
             gap: 12px;
             margin-bottom: 30px;
-            margin-left: 5%;
+            margin-left: 10%;
         }
 
         .terms-checkbox {
@@ -594,13 +594,13 @@ body {
             background: white;
             border: 1px solid var(--secondary-text-color);
             border-radius: 25px;
-            padding: 8px 12px;
-            font-size: 6px;
+            padding: 4px 4px;
+            font-size: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 12px;
+            
             transition: border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
