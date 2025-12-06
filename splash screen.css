@@ -21,7 +21,7 @@ body {
     min-height: 100vh;
     min-width: 100vw;
     background-image: 
-        linear-gradient(rgba(111, 68, 219, 0.842), rgba(111, 68, 219, 0.842)),
+        linear-gradient(rgba(248, 247, 250, 1), rgba(184, 172, 250, 1)),
         url("assets/one-arm-gym.jpg");
     background-position: center;
     background-repeat: no-repeat;
@@ -40,3 +40,4 @@ body {
     left:27%;
 
 }
+
