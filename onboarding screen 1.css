@@ -1,18 +1,13 @@
+   * {
+        box-sizing:border-box
+    }
+
     :root{
       --accent:#2b1b58; /* dark purple */
       --accent-2:#4e3aa6; /* lighter purple */
       --muted:#484859;
       --bg:#0b0b12;
     }
-    *{
-        box-sizing:border-box
-    }
-    html {
-        height:100%;
-        margin:0;
-        font-family:Inter,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;
-         background:white;
-        }
 
     body {
         font-family: 'lora-regular', sans-serif;
@@ -28,7 +23,7 @@
     /* Page layout */
     .screen{
       height:100vh;
-      width:100vw;
+      width:100%;
       display:flex;
       flex-direction:column;
       align-items:stretch;
@@ -153,3 +148,4 @@
     }
 
     }
+
