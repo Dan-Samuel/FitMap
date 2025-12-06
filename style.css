@@ -594,8 +594,8 @@ body {
             background: white;
             border: 1px solid var(--secondary-text-color);
             border-radius: 25px;
-            padding: 4px 4px;
-            font-size: 4px;
+            padding: 0;
+            font-size: 2px;
             cursor: pointer;
             display: flex;
             align-items: center;
