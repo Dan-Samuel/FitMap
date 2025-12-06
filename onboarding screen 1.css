@@ -19,6 +19,11 @@
         /* background: #f8f7fa; */
         background: #000000;
     }
+    html {
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+    }
 
 
     /* Page layout */
@@ -154,6 +159,7 @@
     }
 
     }
+
 
 
 
