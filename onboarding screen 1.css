@@ -9,15 +9,7 @@
       --bg:#0b0b12;
     }
 
-    body {
-        font-family: 'lora-regular', sans-serif;
-        height: 100vh;
-        overflow-x: hidden;
-        max-width: 480px;
-        margin: 0 auto;
-        /* background: #f8f7fa; */
-        background: #000000;
-    }
+    
 
 
     /* Page layout */
@@ -148,4 +140,5 @@
     }
 
     }
+
 
