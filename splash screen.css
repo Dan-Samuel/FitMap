@@ -14,12 +14,7 @@ body {
         background: transparent;
 }
 
-html {
-    height: 100vh;
-    width: 100vw;
-    background: transparent;
-    overflow: hidden;
-}
+
 
 #content {
     width: 100vw;
@@ -43,6 +38,7 @@ html {
     left:27%;
 
 }
+
 
 
 
